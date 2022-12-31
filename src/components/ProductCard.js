@@ -1,11 +1,13 @@
 import React from "react";
 import { BiListPlus } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/actionCreators/productActions";
+import { addToCart, removeFromCart } from "../redux/actionCreators/productActions";
+import { useLocation } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
 
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   return (
     <div
@@ -25,9 +27,12 @@ const ProductCard = ({ product }) => {
         </ul>
       </div>
       <div className='flex gap-2 mt-5'>
-        <button onClick={()=> dispatch(addToCart(product))} className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
+        <button onClick={() => dispatch(addToCart(product))} className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
           Add to cart
         </button>
+        {pathname === '/cart' && <button onClick={() => dispatch(removeFromCart(product._id))} className='bg-red-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
+          Remove
+        </button>}
         <button
           title='Add to wishlist'
           className='bg-indigo-500  py-1 px-2 rounded-full'
