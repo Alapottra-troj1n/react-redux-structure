@@ -14,6 +14,7 @@ const ProductCard = ({ product }) => {
       className='shadow-lg rounded-3xl border  p-3 flex flex-col text-indigo-900'
       key={product._id}
     >
+      { pathname === '/cart' && <div>Quantity : {product.quantity}</div>}
       <div className='h-52 w-52 mx-auto'>
         <img src={product.image} alt={product.model} />
       </div>
@@ -30,7 +31,7 @@ const ProductCard = ({ product }) => {
         <button onClick={() => dispatch(addToCart(product))} className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
           Add to cart
         </button>
-        {pathname === '/cart' && <button onClick={() => dispatch(removeFromCart(product._id))} className='bg-red-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
+        {pathname === '/cart' && <button onClick={() => dispatch(removeFromCart(product))} className='bg-red-500 rounded-full py-1 px-2 flex-1 text-white text-bold'>
           Remove
         </button>}
         <button
